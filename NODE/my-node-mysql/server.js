@@ -11,23 +11,24 @@ const PORT = 5001;
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:5173', 
+    origin: 'http://sakib-taskmanage.netlify.app', 
 }));
 
 const server = http.createServer(app); 
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:5173', 
+        origin: 'http://sakib-taskmanage.netlify.app', 
         methods: ['GET', 'POST', 'PUT', 'DELETE']
     }
 });
 
 const db = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'Adilad9@',
-    database: 'DB_TASK',
-    port: 3306
+host: process.env.MYSQL_ADDON_HOST || 'bkaqrrbryuzdulodib7d-mysql.services.clever-cloud.com',
+  user: process.env.ADDON_USER || 'uj7xc3uzdqcorlb9',
+  password: process.env.ADDON_PASSWORD || "zoJI5607ajYIx6EV2fqu",
+  database: process.env.ADDON_DB || 'bkaqrrbryuzdulodib7d',
+  port: process.env.ADDON_POR || '3306',
+  url :process.env.ADDON_URl
 }).promise();
 
 // Broadcast notifications
